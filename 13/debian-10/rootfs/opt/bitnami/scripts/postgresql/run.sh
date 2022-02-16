@@ -7,6 +7,9 @@ set -o nounset
 set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
+# the entrypoint script is now ran from here, not from Dockerfile
+opt/bitnami/scripts/postgresql/entrypoint.sh
+
 # Load libraries
 . /opt/bitnami/scripts/libpostgresql.sh
 . /opt/bitnami/scripts/libos.sh
@@ -26,8 +29,6 @@ flags+=("$@")
 cmd=$(command -v postgres)
 
 info "** Starting PostgreSQL **"
-if am_i_root; then
-    exec gosu "$POSTGRESQL_DAEMON_USER" "$cmd" "${flags[@]}"
-else
+{
     exec "$cmd" "${flags[@]}"
-fi
+} &>> opt/bitnami/postgresql/logs/postgresql.log
