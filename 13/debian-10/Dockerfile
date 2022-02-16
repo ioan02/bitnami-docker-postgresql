@@ -39,4 +39,4 @@ EXPOSE 5432
 
 USER 1001
 
-CMD ["/bin/bash", "-c", "/opt/bitnami/scripts/postgresql/run.sh | grep -i -v --line-buffered INSERT"]
+CMD ["/bin/bash", "-c", "/opt/bitnami/scripts/postgresql/run.sh | grep -i -v --line-buffered VALUES"]
