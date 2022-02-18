@@ -33,5 +33,4 @@ VOLUME [ "/bitnami/postgresql", "/docker-entrypoint-initdb.d", "/docker-entrypoi
 EXPOSE 5432
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/postgresql/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/postgresql/run.sh" ]
+CMD ["/bin/bash", "-c", "/opt/bitnami/scripts/postgresql/run.sh | grep -i -v --line-buffered VALUES"]
